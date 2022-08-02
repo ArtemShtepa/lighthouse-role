@@ -25,7 +25,7 @@ Lighthouse-role
   become: true
   vars:
     lighthouse_path: "/home/user/lighthouse"
-    clickhouse_host: groups['clickhouse'][0]
+    clickhouse_host: hostvars['clickhouse']['ansible_host']
   roles:
     - lighthouse_role
 ```
