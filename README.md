@@ -12,6 +12,10 @@ Lighthouse-role
 
 - **clickhosue_port**: - Порт Clickhouse для просмотра метрики.
 
+- **clickhosue_user**: - Пользователь Clickhouse для просмотра метрики.
+
+- **clickhosue_password**: - Пароль авторизуемого пользователя Clickhouse.
+
 Пример использования
 --------------------
 

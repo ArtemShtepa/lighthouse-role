@@ -31,8 +31,8 @@
   become: true
   ansible.builtin.replace:
     path: "{{ lighthouse_path }}/app.js"
-    regexp: '127\.0\.0\.1'
-    replace: "{{ groups['clickhouse'][0] }}"
+    regexp: '127\.0\.0\.1:8123\/'
+    replace: "{{ clickhouse_host }}:{{ clickhouse_port }}/user={{ clickhouse_user }}&password={{ clickhouse_password }}"
 - name: Configure NGinX
   become: true
   ansible.builtin.replace:
