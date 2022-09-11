@@ -4,7 +4,23 @@
   ansible.builtin.yum:
     name: "epel-release"
     state: present
-  when: ansible_facts['distribution'] == "CentOS"
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+    - ansible_facts['distribution_major_version'] == "7"
+- name: Change repo for centos8
+  become: true
+  ansible.builtin.command: sed -i -e "s|mirrorlist=|#mirrorlist=|g" /etc/yum.repos.d/CentOS-*
+  changed_when: false
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+    - ansible_facts['distribution_major_version'] == "8"
+- name: Change repo for centos8
+  become: true
+  ansible.builtin.command: sed -i -e "s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g" /etc/yum.repos.d/CentOS-*
+  changed_when: false
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+    - ansible_facts['distribution_major_version'] == "8"
 - name: Install NGinX and Git
   become: true
   ansible.builtin.package:
