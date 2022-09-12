@@ -60,5 +60,6 @@
       include_role:
         name: "lighthouse-role"
       vars:
-        clickhouse_user: logger
-        clickhouse_password: logger
+        clickhouse_user: "logger"
+        clickhouse_password: "logger"
+        lighthouse_port: "8080"
