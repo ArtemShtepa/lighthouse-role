@@ -75,29 +75,9 @@
     - never
 - name: Configure NGinX
   become: true
-  block:
-    #- name: Replace default server on 80 port
-    #  ansible.builtin.replace:
-    #    path: "/etc/nginx/nginx.conf"
-    #    regexp: '/usr/share/nginx/html'
-    #    replace: "{{ lighthouse_path }}"
-    #  when: lighthouse_port == '80'
-    #- name: Restore NGinX configuration
-    #  ansible.builtin.replace:
-    #    path: "/etc/nginx/nginx.conf"
-    #    regexp: "{{ lighthouse_path }}"
-    #    replace: '/usr/share/nginx/html'
-    #  when: lighthouse_port != "80"
-    - name: Add new server by custom port
-      ansible.builtin.template:
-        src: lighthouse.conf.j2
-        dest: '/etc/nginx/conf.d/lighthouse.conf'
-    #  when: lighthouse_port != "80"
-    #- name: Remove custom server for lighthouse
-    #  ansible.builtin.file:
-    #    path: '/etc/nginx/conf.d/lighthouse.conf'
-    #    state: "absent"
-    #  when: lighthouse_port == "80"
+  ansible.builtin.template:
+    src: lighthouse.conf.j2
+    dest: '/etc/nginx/conf.d/lighthouse.conf'
   notify: Restart nginx
 - name: Enable NGinX autostart
   become: true
