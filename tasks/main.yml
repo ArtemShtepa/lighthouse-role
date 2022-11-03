@@ -36,6 +36,12 @@
   ansible.builtin.apt:
     update_cache: yes
   when: ansible_pkg_mgr == "apt"
+- name: Install NGinX repo for YUM
+  become: true
+  ansible.builtin.template:
+    src: nginx.repo
+    dest: '/etc/yum.repos.d/nginx.repo'
+  when: ansible_pkg_mgr == "yum"
 - name: Install NGinX and Git
   become: true
   ansible.builtin.package:
